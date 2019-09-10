@@ -1,28 +1,62 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="todoList">
+    <h1 class="visually-hidden">To Do List</h1>
+    <todo-list-input v-on:add="saveTask" />
+    <ul class="todoList__list">
+      <todo-list-item v-for="task in tasks" v-bind:task="task.name" v-bind:key="task.id"/>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import todoListInput from './components/todoListInput';
+import todoListItem from './components/todoListItem';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    todoListInput,
+    todoListItem,
+  },
+  data () {
+    return {
+      tasks: [
+        { id: 0, name: 'Task1'},
+        { id: 1, name: 'Task2'},
+      ],
+    }
+  },
+  methods: {
+    saveTask: function (task) {
+      this.tasks.push({ id: this.tasks.length, name: task});
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.todoList {
+  width: 800px;
+  margin: 100px auto;
+  padding: 10px 30px 22px 13px;
+
+  border: 1px solid rgba(163, 163, 163, 0.3);
+  border-radius: 6px;
+}
+
+.todoList__list {
+  margin: 0;
+  padding: 0;
+}
+
+.visually-hidden {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding:0 !important;
+	border:0 !important;
+	height: 1px !important; 
+	width: 1px !important; 
+	overflow: hidden;
 }
 </style>
