@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     clickHandler: function () {
-      this.$emit('delete', this.task);
+      this.$emit('remove', this.task);
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <div class="todoList">
     <h1 class="visually-hidden">To Do List</h1>
-    <todo-list-input v-on:add="saveTask"/>
+    <todo-list-input v-on:add="addTask"/>
     <ul class="todoList__list">
-      <todo-list-item v-for="task in tasks" v-bind:task="task" v-bind:key="task.id" v-on:delete="deleteTask"/>
+      <todo-list-item v-for="task in tasks" v-bind:task="task" v-bind:key="task.id" v-on:remove="removeTask"/>
     </ul>
   </div>
 </template>
@@ -21,18 +21,33 @@ export default {
   data () {
     return {
       tasks: [
-        { id: 0, name: 'Task1', status: true},
-        { id: 1, name: 'Task2', status: false},
+        { id: 0, name: 'Task1', status: true },
+        { id: 1, name: 'Task2', status: false },
       ]
     }
   },
+  mounted() {
+    if (localStorage.getItem('tasks')) {
+      try {
+        this.tasks = JSON.parse(localStorage.getItem('tasks'));
+      } catch(e) {
+        localStorage.removeItem('tasks');
+      }
+    }
+  },
   methods: {
-    saveTask: function (task) {
-      this.tasks.push({ id: this.tasks.length, name: task, status: false});
+    saveTasks: function () {
+      const parsed = JSON.stringify(this.tasks);
+      localStorage.setItem('tasks', parsed);
     },
-    deleteTask: function (task) {
+    addTask: function (task) {
+      this.tasks.push({ id: this.tasks.length, name: task, status: false });
+      this.saveTasks();
+    },
+    removeTask: function (task) {
       const taskIndex = this.tasks.indexOf(task);
       this.tasks.splice(taskIndex, 1);
+      this.saveTasks();
     },
   },
 }
