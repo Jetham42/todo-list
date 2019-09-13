@@ -3,7 +3,7 @@
     <h1 class="visually-hidden">To Do List</h1>
     <todo-list-input v-on:add="addTask"/>
     <ul class="todoList__list">
-      <todo-list-item v-for="task in tasks" v-bind:task="task" v-bind:key="task.id" v-on:remove="removeTask"/>
+      <todo-list-item v-for="task in tasks" v-bind:task="task" v-bind:key="task.id" v-on:remove="removeTask" v-on:change="changeTask"/>
     </ul>
   </div>
 </template>
@@ -49,6 +49,13 @@ export default {
       this.tasks.splice(taskIndex, 1);
       this.saveTasks();
     },
+    changeTask: function (task) {
+      if (task.name.length === 0) {
+        this.removeTask(task);
+      } else {
+        this.saveTasks();
+      }
+    }
   },
 }
 </script>

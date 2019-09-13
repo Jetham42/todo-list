@@ -1,7 +1,7 @@
 <template>
   <li class="taskBlock">
-    <input class="taskBlock__checkbox" type="checkbox" v-model="task.status">
-    <input class="taskBlock__input" type="text" v-model="task.name">
+    <input class="taskBlock__checkbox" type="checkbox" v-model="task.status" @change="changeHandler">
+    <input class="taskBlock__input" type="text" minlength="2" v-model="task.name" @change="changeHandler">
     <button class="taskBlock__delete" @click="clickHandler">X</button>
   </li>
 </template>
@@ -16,7 +16,10 @@ export default {
   methods: {
     clickHandler: function () {
       this.$emit('remove', this.task);
-    }
+    },
+    changeHandler: function () {
+      this.$emit('change', this.task);
+    },
   }
 }
 </script>
