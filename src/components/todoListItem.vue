@@ -1,8 +1,8 @@
 <template>
   <li class="taskBlock">
-    <input class="taskBlock__checkbox" type="checkbox">
-    <input class="taskBlock__input" type="text" v-model="inputValue">
-    <button class="taskBlock__delete">X</button>
+    <input class="taskBlock__checkbox" type="checkbox" v-model="task.status">
+    <input class="taskBlock__input" type="text" v-model="task.name">
+    <button class="taskBlock__delete" @click="clickHandler">X</button>
   </li>
 </template>
 
@@ -11,11 +11,12 @@ export default {
   props: ['task'],
   data () {
     return {
-      inputValue:  task,
     }
   },
   methods: {
-    
+    clickHandler: function () {
+      this.$emit('delete', this.task);
+    }
   }
 }
 </script>
