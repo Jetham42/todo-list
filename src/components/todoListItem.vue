@@ -1,6 +1,7 @@
 <template>
   <li class="taskBlock">
-    <input class="taskBlock__checkbox" type="checkbox" v-model="task.status" @change="changeHandler">
+    <input class="taskBlock__checkbox visually-hidden" id="task-checkbox" type="checkbox" v-model="task.status" @change="changeHandler">
+    <label class="taskBlock__label" for="task-checkbox"></label>
     <input class="taskBlock__input" type="text" minlength="2" v-model="task.name" @change="changeHandler">
     <button class="taskBlock__delete" @click="clickHandler">X</button>
   </li>
@@ -41,8 +42,16 @@ export default {
     margin-bottom: 0;
   }
 
-  .taskBlock__checkbox {
-    margin: 0 5px 0 20px;
+  .taskBlock__label {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+
+    background: url(../assets/checkbox_unchecked.svg) no-repeat;
+  }
+
+  .taskBlock__checkbox:checked + .taskBlock__label {
+    background: url(../assets/checkbox.svg) no-repeat;
   }
 
   .taskBlock__input {
@@ -90,5 +99,4 @@ export default {
 
     outline: none;
   }
-
 </style>

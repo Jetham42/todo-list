@@ -61,28 +61,43 @@ export default {
 </script>
 
 <style>
-.todoList {
-  width: 800px;
-  margin: 100px auto;
-  padding: 10px 30px 22px 13px;
+  .todoList {
+    width: 864px;
+    margin: 100px auto;
+    padding: 10px 30px 22px 13px;
 
-  border: 1px solid rgba(163, 163, 163, 0.3);
-  border-radius: 6px;
-}
+    border: 1px solid rgba(163, 163, 163, 0.3);
+    border-radius: 6px;
+  }
 
-.todoList__list {
-  margin: 0;
-  padding: 0;
-}
+  .todoList__list {
+    margin: 0;
+    padding: 0;
+  }
 
-.visually-hidden {
-	position: absolute !important;
-	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-	clip: rect(1px, 1px, 1px, 1px);
-	padding:0 !important;
-	border:0 !important;
-	height: 1px !important; 
-	width: 1px !important; 
-	overflow: hidden;
-}
+  .visually-hidden {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    padding:0 !important;
+    border:0 !important;
+    height: 1px !important; 
+    width: 1px !important; 
+    overflow: hidden;
+  }
+
+  @media (max-width: 1024px) {
+    .todoList {
+      width: 800px;
+      margin: 80px auto;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .todoList {
+      width: 500px;
+      margin: 40px auto;
+    }
+  }
+
 </style>
