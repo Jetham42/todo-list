@@ -50,7 +50,7 @@ export default {
   }
 
   .inputBlock__input {
-    width: 100%;
+    width: 697px;
     padding: 12px 20px;
 
     font-size: inherit;
@@ -90,5 +90,17 @@ export default {
   .inputBlock__submit:active {
     background-color: #285712;
     border-color: #285712;
+  }
+
+  @media (max-width: 1024px) {
+    .inputBlock__input {
+      width: 633px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .inputBlock__input {
+      width: 333px;
+    }
   }
 </style>
