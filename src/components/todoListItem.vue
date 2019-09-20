@@ -64,10 +64,6 @@ export default {
     background: url(../assets/checkbox_hover.svg) no-repeat;
   }
 
-  .taskBlock__input {
-    width: 789px;
-  }
-
   .taskBlock__delete {
     display: block;
     width: 14px;
@@ -94,6 +90,7 @@ export default {
   }
 
   .taskBlock__input {
+    width: 91%;
     padding: 5px 0;
 
     position: relative;
@@ -109,7 +106,7 @@ export default {
 
     outline: none;
   }
-
+/* 
   @media (max-width: 1024px) {
     .taskBlock__input {
       width: 725px;
@@ -120,5 +117,5 @@ export default {
     .taskBlock__input {
       width: 427px;
     }
-  }
+  } */
 </style>

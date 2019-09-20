@@ -62,7 +62,9 @@ export default {
 
 <style>
   .todoList {
-    width: 864px;
+    width: 80%;
+    max-width: 864px;
+    min-width: 500px;
     margin: 100px auto;
     padding: 10px 30px 22px 13px;
 
@@ -84,19 +86,5 @@ export default {
     height: 1px !important; 
     width: 1px !important; 
     overflow: hidden;
-  }
-
-  @media (max-width: 1024px) {
-    .todoList {
-      width: 800px;
-      margin: 80px auto;
-    }
-  }
-
-  @media (max-width: 960px) {
-    .todoList {
-      width: 500px;
-      margin: 40px auto;
-    }
   }
 </style>
