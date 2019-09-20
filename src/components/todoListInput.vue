@@ -50,7 +50,7 @@ export default {
   }
 
   .inputBlock__input {
-    width: 85%;
+    width: 80%;
     padding: 12px 20px;
 
     font-size: inherit;
@@ -66,8 +66,10 @@ export default {
   }
 
   .inputBlock__submit {
+    width: 100px;
     margin-left: 25px;
-    padding: 12px 30px;
+    /* padding: 12px 30px; */
+    padding: 12px 0;
 
     font-size: inherit;
     color: #3e8a1c;
