@@ -1,28 +1,53 @@
 <template>
   <li class="taskBlock">
-    <input class="taskBlock__checkbox visually-hidden" v-bind:id="'checkbox_' + this.task.id" type="checkbox" v-model="task.status" @change="changeHandler">
-    <label class="taskBlock__label" v-bind:for="'checkbox_' + this.task.id"></label>
-    <input class="taskBlock__input" type="text" minlength="2" v-model="task.name" @change="changeHandler">
-    <button class="taskBlock__delete" @click="clickHandler">X</button>
+    <input
+      :id="'checkbox_' + task.id"
+      v-model="task.status"
+      class="taskBlock__checkbox visually-hidden"
+      type="checkbox"
+      @change="changeHandler"
+    >
+    <label
+      class="taskBlock__label"
+      :for="'checkbox_' + task.id"
+    />
+    <input
+      v-model="task.name"
+      class="taskBlock__input"
+      type="text"
+      minlength="2"
+      @change="changeHandler"
+    >
+    <button
+      class="taskBlock__delete"
+      @click="clickHandler"
+    >
+      X
+    </button>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['task'],
-  data () {
+  props: {
+    task: {
+      default() { return { message: 'error' }; },
+      type: Object,
+    },
+  },
+  data() {
     return {
-    }
+    };
   },
   methods: {
-    clickHandler: function () {
+    clickHandler() {
       this.$emit('remove', this.task.id);
     },
-    changeHandler: function () {
+    changeHandler() {
       this.$emit('change', this.task);
     },
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -106,7 +131,7 @@ export default {
 
     outline: none;
   }
-/* 
+/*
   @media (max-width: 1024px) {
     .taskBlock__input {
       width: 725px;

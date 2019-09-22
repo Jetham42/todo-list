@@ -1,27 +1,41 @@
 <template>
   <div class="inputBlock">
-    <h2 class="inputBlock__header">Task</h2>
-    <input class="inputBlock__input" type="text" minlength="2" v-model="inputValue" @keyup.13="handlerClick">
-    <button class="inputBlock__submit" type="button" @click="handlerClick">Add</button>
+    <h2 class="inputBlock__header">
+      Task
+    </h2>
+    <input
+      v-model="inputValue"
+      class="inputBlock__input"
+      type="text"
+      minlength="2"
+      @keyup.13="handlerClick"
+    >
+    <button
+      class="inputBlock__submit"
+      type="button"
+      @click="handlerClick"
+    >
+      Add
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       inputValue: '',
-    }
+    };
   },
   methods: {
-    handlerClick: function () {
+    handlerClick() {
       if (this.inputValue.length > 1) {
         this.$emit('add', this.inputValue);
         this.inputValue = '';
       }
-    } 
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>

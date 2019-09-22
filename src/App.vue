@@ -1,50 +1,60 @@
 <template>
   <div class="todoList">
-    <h1 class="visually-hidden">To Do List</h1>
-    <todo-list-input v-on:add="addTask"/>
+    <h1 class="visually-hidden">
+      To Do List
+    </h1>
+    <todo-list-input @add="addTask" />
     <ul class="todoList__list">
-      <todo-list-item v-for="task in tasks" v-bind:task="task" v-bind:key="task.id" v-on:remove="removeTask" v-on:change="changeTask"/>
+      <todo-list-item
+        v-for="task in tasks"
+        :key="task.id"
+        :task="task"
+        @remove="removeTask"
+        @change="changeTask"
+      />
     </ul>
   </div>
 </template>
 
 <script>
-import todoListInput from './components/todoListInput';
-import todoListItem from './components/todoListItem';
-import { addItem, deleteItem, updateItem, fetchData } from './utlis/client';
+import todoListInput from './components/todoListInput.vue';
+import todoListItem from './components/todoListItem.vue';
+import {
+  addItem, deleteItem, updateItem, fetchData,
+} from './utlis/client';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     todoListInput,
     todoListItem,
   },
-  data () {
+  data() {
     return {
-      tasks: null
-    }
+      tasks: null,
+    };
   },
   mounted() {
-    fetchData('tasks').then(response => this.tasks = response.data);
+    fetchData('tasks').then((response) => { this.tasks = response.data; });
   },
   methods: {
-    addTask: function (task) {
+    addTask(task) {
       addItem('tasks', { name: task, status: false }).then(response => this.tasks.push(response.data));
     },
-    removeTask: function (id) {
-      let index = this.tasks.findIndex(item => item.id === id);
+    removeTask(id) {
+      const index = this.tasks.findIndex(item => item.id === id);
       deleteItem('tasks', id);
       this.tasks.splice(index, 1);
     },
-    changeTask: function (task) {
+    changeTask(task) {
       if (task.name.length === 0) {
         this.removeTask(task);
-      } else {;
+      } else {
         updateItem('tasks', task, task.id);
       }
-    }
+    },
   },
-}
+};
 </script>
 
 <style>
@@ -70,8 +80,8 @@ export default {
     clip: rect(1px, 1px, 1px, 1px);
     padding:0 !important;
     border:0 !important;
-    height: 1px !important; 
-    width: 1px !important; 
+    height: 1px !important;
+    width: 1px !important;
     overflow: hidden;
   }
 </style>

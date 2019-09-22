@@ -12,7 +12,7 @@
     },
     {
       "name": "Play the guitar",
-      "status": false,
+      "status": true,
       "id": 3
     }
   ]
