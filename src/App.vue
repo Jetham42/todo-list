@@ -1,7 +1,6 @@
 <template>
   <div class="todoList">
     <h1 class="visually-hidden">To Do List</h1>
-    <p>{{ info }}</p>
     <todo-list-input v-on:add="addTask"/>
     <ul class="todoList__list">
       <todo-list-item v-for="task in tasks" v-bind:task="task" v-bind:key="task.id" v-on:remove="removeTask" v-on:change="changeTask"/>
@@ -26,27 +25,22 @@ export default {
     }
   },
   mounted() {
-    this.tasks = fetchData('tasks');
-    console.log(fetchData('tasks'));
+    fetchData('tasks').then(response => this.tasks = response.data);
   },
   methods: {
     addTask: function (task) {
-      addItem('tasks', { name: task, status: false });
-      refreshData();
+      addItem('tasks', { name: task, status: false }).then(response => this.tasks.push(response.data));
     },
-    removeTask: function (task) {
-      const taskIndex = this.tasks.id;
-      deleteItem('tasks', taskIndex)
-      refreshData();
-    },
-    refreshData: function () { 
-      this.tasks = fetchData('tasks')
+    removeTask: function (id) {
+      let index = this.tasks.findIndex(item => item.id === id);
+      deleteItem('tasks', id);
+      this.tasks.splice(index, 1);
     },
     changeTask: function (task) {
       if (task.name.length === 0) {
         this.removeTask(task);
-      } else {
-        // updateItem('tasks',)/
+      } else {;
+        updateItem('tasks', task, task.id);
       }
     }
   },

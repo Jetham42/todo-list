@@ -1,14 +1,19 @@
 {
   "tasks": [
     {
-      "name": "Wash Hands",
-      "status": false,
-      "id": 0
-    },
-    {
-      "name": "Dance",
+      "name": "Wash hands",
       "status": true,
       "id": 1
+    },
+    {
+      "name": "Get some sleep",
+      "status": true,
+      "id": 2
+    },
+    {
+      "name": "Play the guitar",
+      "status": false,
+      "id": 3
     }
   ]
 }

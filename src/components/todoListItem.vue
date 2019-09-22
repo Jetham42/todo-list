@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     clickHandler: function () {
-      this.$emit('remove', this.task);
+      this.$emit('remove', this.task.id);
     },
     changeHandler: function () {
       this.$emit('change', this.task);
