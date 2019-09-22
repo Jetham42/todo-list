@@ -1,6 +1,7 @@
 <template>
   <div class="todoList">
     <h1 class="visually-hidden">To Do List</h1>
+    <p>{{ info }}</p>
     <todo-list-input v-on:add="addTask"/>
     <ul class="todoList__list">
       <todo-list-item v-for="task in tasks" v-bind:task="task" v-bind:key="task.id" v-on:remove="removeTask" v-on:change="changeTask"/>
@@ -11,6 +12,7 @@
 <script>
 import todoListInput from './components/todoListInput';
 import todoListItem from './components/todoListItem';
+import { addItem, deleteItem, updateItem, fetchData } from './utlis/client';
 
 export default {
   name: 'app',
@@ -20,40 +22,31 @@ export default {
   },
   data () {
     return {
-      tasks: [
-        { id: 0, name: 'Task1', status: true },
-        { id: 1, name: 'Task2', status: false },
-      ]
+      tasks: null
     }
   },
   mounted() {
-    if (localStorage.getItem('tasks')) {
-      try {
-        this.tasks = JSON.parse(localStorage.getItem('tasks'));
-      } catch(e) {
-        localStorage.removeItem('tasks');
-      }
-    }
+    this.tasks = fetchData('tasks');
+    console.log(fetchData('tasks'));
   },
   methods: {
-    saveTasks: function () {
-      const parsed = JSON.stringify(this.tasks);
-      localStorage.setItem('tasks', parsed);
-    },
     addTask: function (task) {
-      this.tasks.push({ id: this.tasks.length, name: task, status: false });
-      this.saveTasks();
+      addItem('tasks', { name: task, status: false });
+      refreshData();
     },
     removeTask: function (task) {
-      const taskIndex = this.tasks.indexOf(task);
-      this.tasks.splice(taskIndex, 1);
-      this.saveTasks();
+      const taskIndex = this.tasks.id;
+      deleteItem('tasks', taskIndex)
+      refreshData();
+    },
+    refreshData: function () { 
+      this.tasks = fetchData('tasks')
     },
     changeTask: function (task) {
       if (task.name.length === 0) {
         this.removeTask(task);
       } else {
-        this.saveTasks();
+        // updateItem('tasks',)/
       }
     }
   },

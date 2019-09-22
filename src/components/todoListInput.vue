@@ -68,7 +68,6 @@ export default {
   .inputBlock__submit {
     width: 100px;
     margin-left: 25px;
-    /* padding: 12px 30px; */
     padding: 12px 0;
 
     font-size: inherit;
