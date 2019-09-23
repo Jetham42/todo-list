@@ -3,17 +3,17 @@
     {
       "name": "Wash hands",
       "status": true,
-      "id": 1
+      "id": 0
     },
     {
       "name": "Get some sleep",
-      "status": true,
-      "id": 2
+      "status": false,
+      "id": 1
     },
     {
       "name": "Play the guitar",
       "status": true,
-      "id": 3
+      "id": 2
     }
   ]
 }

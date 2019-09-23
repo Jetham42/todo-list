@@ -57,21 +57,23 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
   .todoList {
-    width: 80%;
-    max-width: 864px;
-    min-width: 500px;
-    margin: 100px auto;
-    padding: 10px 30px 22px 13px;
+    & {
+      width: 80%;
+      max-width: 864px;
+      min-width: 500px;
+      margin: 100px auto;
+      padding: 10px 30px 22px 13px;
 
-    border: 1px solid rgba(163, 163, 163, 0.3);
-    border-radius: 6px;
-  }
+      border: 1px solid rgba(163, 163, 163, 0.3);
+      border-radius: 6px;
+    }
 
-  .todoList__list {
-    margin: 0;
-    padding: 0;
+    &__list {
+      margin: 0;
+      padding: 0;
+    }
   }
 
   .visually-hidden {

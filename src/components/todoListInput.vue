@@ -38,72 +38,76 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
   .inputBlock {
-    display: flex;
-    justify-content: space-between;
+    & {
+      display: flex;
+      justify-content: space-between;
 
-    position: relative;
+      position: relative;
 
-    font-size: 17px;
-  }
+      font-size: 17px;
+    }
 
-  .inputBlock__header {
-    display: block;
-    margin: 0;
-    padding: 0 5px;
+    &__header {
+      display: block;
+      margin: 0;
+      padding: 0 5px;
 
-    position: absolute;
-    top: -7px;
-    left: 18px;
+      position: absolute;
+      top: -7px;
+      left: 18px;
 
-    font-size: 13px;
-    color: #a3a3a3;
+      font-size: 13px;
+      color: #a3a3a3;
 
-    background-color: white;
-  }
+      background-color: white;
+    }
 
-  .inputBlock__input {
-    width: 80%;
-    padding: 12px 20px;
+    &__input {
+      width: 80%;
+      padding: 12px 20px;
 
-    font-size: inherit;
+      font-size: inherit;
 
-    border: 1px solid rgba(163, 163, 163, 0.3);
-    border-radius: 6px;
-  }
+      border: 1px solid rgba(163, 163, 163, 0.3);
+      border-radius: 6px;
 
-  .inputBlock__input:focus {
-    border-color: #a3a3a3;
+      &:focus {
+        border-color: #a3a3a3;
 
-    outline: none;
-  }
+        outline: none;
+      }
+    }
 
-  .inputBlock__submit {
-    width: 100px;
-    margin-left: 25px;
-    padding: 12px 0;
+    &__submit {
+      width: 100px;
+      margin-left: 25px;
+      padding: 12px 0;
 
-    font-size: inherit;
-    color: #3e8a1c;
-    text-transform: uppercase;
+      font-size: inherit;
+      color: #3e8a1c;
+      text-transform: uppercase;
 
-    background-color: transparent;
-    border: 2px solid #3e8a1c;
-    border-radius: 6px;
-  }
+      background-color: transparent;
+      border: 2px solid #3e8a1c;
+      border-radius: 6px;
 
-  .inputBlock__submit:hover,
-  .inputBlock__submit:focus {
-    color: white;
+      &:hover,
+      &:focus {
+        color: white;
 
-    background-color: #3e8a1c;
+        background-color: #3e8a1c;
 
-    outline: none;
-  }
+        cursor: pointer;
+        outline: none;
+      }
+    
 
-  .inputBlock__submit:active {
-    background-color: #285712;
-    border-color: #285712;
+      &:active {
+        background-color: #285712;
+        border-color: #285712;
+      }
+    }
   }
 </style>

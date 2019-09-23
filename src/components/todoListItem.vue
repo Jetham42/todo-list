@@ -50,97 +50,90 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
   .taskBlock {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+    & {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-  .taskBlock:first-child {
-    margin-top: 20px;
-  }
+    &:first-child {
+      margin-top: 20px;
+    }
 
-  .taskBlock:last-child {
-    margin-bottom: 0;
-  }
+    &:last-child {
+      margin-bottom: 0;
+    }
 
-  .taskBlock__label {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+    &__label {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
 
-    background: url(../assets/checkbox_unchecked.svg) no-repeat;
-  }
+      background: url(../assets/checkbox_unchecked.svg) no-repeat;
+    }
 
-  .taskBlock__checkbox:checked + .taskBlock__label {
-    background: url(../assets/checkbox.svg) no-repeat;
-  }
+    &__checkbox:checked + &__label {
+      background: url(../assets/checkbox.svg) no-repeat;
+    }
 
-  .taskBlock__checkbox:hover + .taskBlock__label,
-  .taskBlock__checkbox:focus + .taskBlock__label {
-    background: url(../assets/checkbox_unchecked_hover.svg) no-repeat;
-  }
+    &__checkbox:hover + &__label,
+    &__checkbox:focus + &__label {
+      background: url(../assets/checkbox_unchecked_hover.svg) no-repeat;
 
-  .taskBlock__checkbox:checked:hover + .taskBlock__label,
-  .taskBlock__checkbox:checked:focus + .taskBlock__label {
-    background: url(../assets/checkbox_hover.svg) no-repeat;
-  }
+      cursor: pointer;
+    }
 
-  .taskBlock__delete {
-    display: block;
-    width: 14px;
-    height: 23px;
-    margin: 0 16px 0 8px;
-    padding: 0;
+    &__checkbox:checked:hover + &__label,
+    &__checkbox:checked:focus + &__label {
+      background: url(../assets/checkbox_hover.svg) no-repeat;
+    }
 
-    font-size: 20px;
-    color: red;
+    &__delete {
+      display: block;
+      width: 14px;
+      height: 23px;
+      margin: 0 16px 0 8px;
+      padding: 0;
 
-    background-color: transparent;
-    border: none;
-  }
+      font-size: 20px;
+      color: red;
 
-  .taskBlock__delete:hover,
-  .taskBlock__delete:focus {
-    color: brown;
+      background-color: transparent;
+      border: none;
 
-    outline: none;
-  }
+      &:hover,
+      &:focus {
+        color: brown;
 
-  .taskBlock__delete:active {
-    font-size: 15px;
-  }
+        outline: none;
+        cursor: pointer;
+      }
 
-  .taskBlock__input {
-    width: 91%;
-    padding: 5px 0;
+      &:active {
+        font-size: 15px;
+      }
+    }
 
-    position: relative;
+    &__input {
+      width: 91%;
+      padding: 5px 0;
 
-    font-size: 17px;
+      position: relative;
 
-    border: none;
-  }
+      font-size: 17px;
 
-  .taskBlock__input:focus {
-    padding-bottom: 4px;
-    border-bottom: 1px solid #303f9f;
+      border: none;
 
-    outline: none;
-  }
-/*
-  @media (max-width: 1024px) {
-    .taskBlock__input {
-      width: 725px;
+      &:focus {
+        padding-bottom: 4px;
+        border-bottom: 1px solid #303f9f;
+
+        outline: none;
+      }
     }
   }
-
-  @media (max-width: 960px) {
-    .taskBlock__input {
-      width: 427px;
-    }
-  } */
 </style>
