@@ -2,7 +2,7 @@
   <li class="taskBlock">
     <input
       :id="'checkbox_' + task.id"
-      v-model="task.status"
+      v-model="currentTask.status"
       class="taskBlock__checkbox visually-hidden"
       type="checkbox"
       @change="changeHandler"
@@ -12,7 +12,7 @@
       :for="'checkbox_' + task.id"
     />
     <input
-      v-model="task.name"
+      v-model="currentTask.name"
       class="taskBlock__input"
       type="text"
       minlength="2"
@@ -34,17 +34,21 @@ export default {
       default() { return { message: 'error' }; },
       type: Object,
     },
+    index: {
+      type: Number,
+    }
   },
   data() {
     return {
+      currentTask: Object.assign({}, this.task),
     };
   },
   methods: {
     clickHandler() {
-      this.$emit('remove', this.task.id);
+      this.$emit('remove', this.index, this.currentTask);
     },
     changeHandler() {
-      this.$emit('change', this.task);
+      this.$emit('change', this.index, this.currentTask);
     },
   },
 };

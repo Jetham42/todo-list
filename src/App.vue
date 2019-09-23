@@ -6,9 +6,10 @@
     <todo-list-input @add="addTask" />
     <ul class="todoList__list">
       <todo-list-item
-        v-for="task in tasks"
+        v-for="(task, index) in tasks"
         :key="task.id"
         :task="task"
+        :index="index"
         @remove="removeTask"
         @change="changeTask"
       />
@@ -41,14 +42,13 @@ export default {
     addTask(task) {
       addItem('tasks', { name: task, status: false }).then(response => this.tasks.push(response.data));
     },
-    removeTask(id) {
-      const index = this.tasks.findIndex(item => item.id === id);
-      deleteItem('tasks', id);
+    removeTask(index, task) {
+      deleteItem('tasks', task.id);
       this.tasks.splice(index, 1);
     },
-    changeTask(task) {
+    changeTask(index, task) {
       if (task.name.length === 0) {
-        this.removeTask(task);
+        this.removeTask(index, task);
       } else {
         updateItem('tasks', task, task.id);
       }
@@ -78,7 +78,6 @@ export default {
 
   .visually-hidden {
     position: absolute !important;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
     padding:0 !important;
     border:0 !important;

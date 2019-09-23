@@ -8,7 +8,7 @@
       class="inputBlock__input"
       type="text"
       minlength="2"
-      @keyup.13="handlerClick"
+      @keyup.enter="handlerClick"
     >
     <button
       class="inputBlock__submit"
