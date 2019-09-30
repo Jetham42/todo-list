@@ -6,12 +6,20 @@
     <todo-list-input @add="addTask" />
     <ul class="todoList__list">
       <todo-list-item
-        v-for="(task, index) in tasks"
+        v-for="task in favoriteTasks"
         :key="task.id"
         :task="task"
-        :index="index"
-        @remove="removeTask"
-        @change="changeTask"
+        @remove="removeTask(task.id)"
+        @change="changeTask(task.id, $event)"
+      />
+    </ul>
+    <ul class="todoList__list">
+      <todo-list-item
+        v-for="task in elseTasks"
+        :key="task.id"
+        :task="task"
+        @remove="removeTask(task.id)"
+        @change="changeTask(task.id, $event)"
       />
     </ul>
   </div>
@@ -32,26 +40,51 @@ export default {
   },
   data() {
     return {
-      tasks: null,
+      tasks: [],
     };
+  },
+  computed: {
+    favoriteTasks() {
+      return this.tasks.filter(item => item.isFavorite === true);
+    },
+    elseTasks() {
+      return this.tasks.filter(item => item.isFavorite === false);
+    },
   },
   mounted() {
     fetchData('tasks').then((response) => { this.tasks = response.data; });
   },
   methods: {
-    addTask(task) {
-      addItem('tasks', { name: task, status: false }).then(response => this.tasks.push(response.data));
-    },
-    removeTask(index, task) {
-      deleteItem('tasks', task.id);
-      this.tasks.splice(index, 1);
-    },
-    changeTask(index, task) {
-      if (task.name.length === 0) {
-        this.removeTask(index, task);
-      } else {
-        updateItem('tasks', task, task.id);
+    idGenerator() {
+      if (this.tasks.length === 0) {
+        return 1;
       }
+      return this.tasks[this.tasks.length - 1].id + 1;
+    },
+    addTask(name) {
+      this.tasks.push({
+        id: this.idGenerator(), name, status: false, isFavorite: false,
+      });
+      addItem('tasks', { name, status: false, isFavorite: false });
+    },
+    removeTask(id) {
+      this.tasks.splice(this.getIndex(id), 1);
+      deleteItem('tasks', id);
+    },
+    changeTask(id, event) {
+      const index = this.getIndex(id);
+      if (event.value.length === 0) {
+        this.removeTask(index, id);
+      } else {
+        this.updateTask(index, event.field, event.value);
+        updateItem('tasks', { [event.field]: event.value }, id);
+      }
+    },
+    updateTask(index, field, value) {
+      this.$set(this.tasks[index], field, value);
+    },
+    getIndex(id) {
+      return this.tasks.findIndex(x => x.id === id);
     },
   },
 };

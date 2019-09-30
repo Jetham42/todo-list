@@ -2,23 +2,52 @@
   <li class="taskBlock">
     <input
       :id="'checkbox_' + task.id"
-      v-model="currentTask.status"
+      :value="task.status"
+      :checked="task.status"
       class="taskBlock__checkbox visually-hidden"
       type="checkbox"
-      @change="changeHandler"
+      @change="changeStatus"
     >
     <label
       class="taskBlock__label"
       :for="'checkbox_' + task.id"
-    />
+    >
+      <icon-checkbox
+        width="30"
+        height="30"
+        :status="task.status"
+        icon-color="red"
+        icon-hover-color="brown"
+      /></label>
     <input
-      v-model="currentTask.name"
+      :value="task.name"
       class="taskBlock__input"
       type="text"
       minlength="2"
-      @change="changeHandler"
+      @change="changeHandler($event, 'name')"
     >
+    <input
+      :id="'isFavorite_' + task.id"
+      :value="task.isFavorite"
+      :checked="task.isFavorite"
+      class="taskBlock__checkbox visually-hidden"
+      type="checkbox"
+      @change="changeIsFavorite"
+    >
+    <label
+      class="taskBlock__label"
+      :for="'isFavorite_' + task.id"
+    >
+      <icon-star
+        width="30"
+        height="30"
+        :is-favorite="task.isFavorite"
+        icon-color="red"
+        icon-hover-color="brown"
+      />
+    </label>
     <button
+      type="button"
       class="taskBlock__delete"
       @click="clickHandler"
     >
@@ -28,27 +57,32 @@
 </template>
 
 <script>
+import iconCheckbox from './icons/iconCheckbox.vue';
+import iconStar from './icons/iconStar.vue';
+
 export default {
+  components: {
+    iconCheckbox,
+    iconStar,
+  },
   props: {
     task: {
       default() { return { message: 'error' }; },
       type: Object,
     },
-    index: {
-      type: Number,
-    }
-  },
-  data() {
-    return {
-      currentTask: Object.assign({}, this.task),
-    };
   },
   methods: {
     clickHandler() {
-      this.$emit('remove', this.index, this.currentTask);
+      this.$emit('remove');
     },
-    changeHandler() {
-      this.$emit('change', this.index, this.currentTask);
+    changeHandler(evt, field) {
+      this.$emit('change', { value: evt.target.value, field });
+    },
+    changeStatus() {
+      this.$emit('change', { value: !this.task.status, field: 'status' });
+    },
+    changeIsFavorite() {
+      this.$emit('change', { value: !this.task.isFavorite, field: 'isFavorite' });
     },
   },
 };
@@ -77,23 +111,12 @@ export default {
       height: 30px;
       margin-right: 10px;
 
-      background: url(../assets/checkbox_unchecked.svg) no-repeat;
-    }
-
-    &__checkbox:checked + &__label {
-      background: url(../assets/checkbox.svg) no-repeat;
-    }
-
-    &__checkbox:hover + &__label,
-    &__checkbox:focus + &__label {
-      background: url(../assets/checkbox_unchecked_hover.svg) no-repeat;
-
       cursor: pointer;
     }
 
-    &__checkbox:checked:hover + &__label,
-    &__checkbox:checked:focus + &__label {
-      background: url(../assets/checkbox_hover.svg) no-repeat;
+    &__favorite {
+      background-color: transparent;
+      border: none;
     }
 
     &__delete {
@@ -123,7 +146,7 @@ export default {
     }
 
     &__input {
-      width: 91%;
+      width: 85%;
       padding: 5px 0;
 
       position: relative;

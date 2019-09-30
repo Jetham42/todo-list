@@ -102,7 +102,6 @@ export default {
         cursor: pointer;
         outline: none;
       }
-    
 
       &:active {
         background-color: #285712;
